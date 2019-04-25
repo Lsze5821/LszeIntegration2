@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Louis Sze
@@ -33,12 +34,20 @@ public class Main {
     System.out.println("Minimum Buy in is $100.00");
 
     double playerMoney = 0;
-    if (userInput.hasNextDouble()) {
+    boolean moneyIsSet = false;
+    while(!moneyIsSet) {
+     try{
       playerMoney = userInput.nextDouble();
-    } else {
-      System.out.println("Wrong Input");
-
+      moneyIsSet=true;
+      break;
+     }
+     catch(InputMismatchException IME) {
+       System.out.println("Must enter Money Amount!");
+       break;
+      // continue;
+     }
     }
+    
 
 
     // a while loop for the game to start

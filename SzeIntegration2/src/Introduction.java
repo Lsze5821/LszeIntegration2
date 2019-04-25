@@ -12,7 +12,7 @@ public class Introduction {
 
     Scanner input = new Scanner(System.in); // Scanner to allow user input
     System.out.println("Whats your name?");// Asks user for name
-    String username = input.next();// Stores the next input variable as a String
+    String username = input.nextLine();// Stores the next input variable as a String
     System.out.println("Welcome " + username + "!");// Greets the User
 
     System.out.println("");
