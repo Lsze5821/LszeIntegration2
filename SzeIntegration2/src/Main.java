@@ -26,8 +26,6 @@ public class Main {
     Deck dealerDeck = new Deck();
     // Amount of money starting stored as a double
 
-    // double playerMoney = 500.00;
-
     Scanner userInput = new Scanner(System.in);
 
     System.out.println("How much do you want to Buy in?");
@@ -36,16 +34,16 @@ public class Main {
     double playerMoney = 0;
     boolean moneyIsSet = false;
     while(!moneyIsSet) {
+      //try catch for while the next input is not a double it gets in a loop.
      try{
       playerMoney = userInput.nextDouble();
       moneyIsSet=true;
-      break;
+      
      }
      catch(InputMismatchException IME) {
        System.out.println("Must enter Money Amount!");
-       break;
-      // continue;
      }
+    userInput.nextLine();
     }
     
 
@@ -83,8 +81,8 @@ public class Main {
 
         // Display Dealer Hand, The [Hidden] is the face down card.
         System.out.println(
-            "Dealer Hand: \n " + dealerDeck.getCard(0).toString() + " and [Hidden Card]\n");
-
+            "Dealer Hand: \n" + dealerDeck.getCard(0).toString() );
+        System.out.println( "[Hidden Card]\n");
         // What do player want to do?
         // Enter 1 to hit or 2 to stand.
         System.out.println("Please input [1]To Hit or [2]To Stand?");
