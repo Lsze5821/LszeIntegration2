@@ -34,7 +34,9 @@ public class Main {
     double playerMoney = 0;
     boolean moneyIsSet = false;
     while (!moneyIsSet) {
-      // try catch for while the next input is not a double it gets in a loop.
+      // try catch for the next input is not a double it gets in a loop until
+      // a double or the required amount is given to run.
+      // mismatch exception is used so that the program doesn't crash if the user enters wrong input
       try {
         playerMoney = userInput.nextDouble();
         if (playerMoney > 100 || playerMoney == 100) {
