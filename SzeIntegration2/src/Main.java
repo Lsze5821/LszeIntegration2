@@ -33,19 +33,22 @@ public class Main {
 
     double playerMoney = 0;
     boolean moneyIsSet = false;
-    while(!moneyIsSet) {
-      //try catch for while the next input is not a double it gets in a loop.
-     try{
-      playerMoney = userInput.nextDouble();
-      moneyIsSet=true;
-      
-     }
-     catch(InputMismatchException IME) {
-       System.out.println("Must enter Money Amount!");
-     }
-    userInput.nextLine();
+    while (!moneyIsSet) {
+      // try catch for while the next input is not a double it gets in a loop.
+      try {
+        playerMoney = userInput.nextDouble();
+        if (playerMoney > 100 || playerMoney == 100) {
+
+          moneyIsSet = true;
+        } else {
+          System.out.println("Must Enter Amount Above $100.00");
+        }
+      } catch (InputMismatchException IME) {
+        System.out.println("Must enter Money Amount!");
+      }
+      userInput.nextLine();
     }
-    
+
 
 
     // a while loop for the game to start
@@ -55,12 +58,32 @@ public class Main {
       // Starts the message of how much money you have and how much the player wants to bet.
       System.out
           .println("You currently have $" + playerMoney + ", how much would you like to bet?");
-      double playerBet = userInput.nextDouble();
+
       // if statement if you bet more than you have then it is game over.
-      if (playerBet > playerMoney) {
-        System.out.println("You cannot bet more than what you have, Default Loss");
-        break;
+      // if (playerBet > playerMoney) {
+      boolean moneyBet = false;
+      double playerBet = 0;
+      // Try catch if the user does not bet between 0 and the amount they have
+      // it loops until the user enters right amount
+      while (!moneyBet) {
+        try {
+          playerBet = userInput.nextDouble();
+
+          if (playerBet < playerMoney || playerBet == playerMoney) {
+            moneyBet = true;
+          } else {
+            System.out.println("Must enter amount between 0 and " + playerMoney);
+          }
+        }
+
+        catch (InputMismatchException IME) {
+          System.out.println("Must enter amount between 0 and " + playerMoney);
+        }
+        userInput.nextLine();
       }
+      // System.out.println("You cannot bet more than what you have, Default Loss");
+      // break;
+      // }
 
       boolean endRound = false;
       // boolean variable
@@ -80,9 +103,8 @@ public class Main {
         System.out.println("Your Hand Value: " + playerDeck.cardsValue() + "\n");
 
         // Display Dealer Hand, The [Hidden] is the face down card.
-        System.out.println(
-            "Dealer Hand: \n" + dealerDeck.getCard(0).toString() );
-        System.out.println( "[Hidden Card]\n");
+        System.out.println("Dealer Hand: \n" + dealerDeck.getCard(0).toString());
+        System.out.println("[Hidden Card]\n");
         // What do player want to do?
         // Enter 1 to hit or 2 to stand.
         System.out.println("Please input [1]To Hit or [2]To Stand?");
@@ -97,7 +119,7 @@ public class Main {
           // subtracts money when bust
           if (playerDeck.cardsValue() > 21) {
             System.out.println("Current Hand Value : " + playerDeck.cardsValue());
-            System.out.println("Bust!");
+            System.out.println("Bust!, You Lost");
             System.out.println("");
             playerMoney -= playerBet;// Takes the players money and use the math operator to
                                      // subtract from bet but also make it equal to the amount
