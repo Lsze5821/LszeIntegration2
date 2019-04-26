@@ -109,9 +109,18 @@ public class Main {
         System.out.println("[Hidden Card]\n");
         // What do player want to do?
         // Enter 1 to hit or 2 to stand.
-        System.out.println("Please input [1]To Hit or [2]To Stand?");
-        int response = userInput.nextInt();
-
+        System.out.println("Please input [1] To Hit or [2] To Stand?");
+        int response = 0;
+        boolean answer = false;
+        while(!answer) {
+          try {
+            response = userInput.nextInt();
+            answer=true;
+          }catch(InputMismatchException IME){
+            System.out.println("Must input [1] To Hit or [2] To Stand.");
+          }
+          userInput.nextLine();
+        }
         // They hit
         if (response == 1) {
           playerDeck.draw(playingDeck);
